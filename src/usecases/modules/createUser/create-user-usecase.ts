@@ -1,6 +1,6 @@
-import { UserData } from "src/domain/entities/user";
+import { User } from "src/domain/entities/user";
 import { UserRepository } from "../../protocols/user-repository";
-import { CreateUser } from "./create-user";
+import { CreateUser, UserCreateDTO } from "./create-user";
 import { CreateUserResponse } from "./create-user-response";
 
 export class CreateUserUseCase implements CreateUser {
@@ -10,8 +10,8 @@ export class CreateUserUseCase implements CreateUser {
         this.userRepository = userRepo;
     }
 
-    async createUser(user: UserData): Promise<CreateUserResponse> {
-        await this.userRepository.create(user);
-        return user;
+    async createUser(user: UserCreateDTO): Promise<CreateUserResponse> {
+        const newUser = await this.userRepository.create(user);
+        return newUser;
     }
 }

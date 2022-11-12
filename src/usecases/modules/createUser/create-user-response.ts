@@ -1,4 +1,4 @@
 import { InvalidEmail, InvalidPassword } from "src/domain/errors";
-import { UserData } from "src/domain/proto/user";
+import { User } from "src/domain/entities/user";
 
-export type CreateUserResponse = InvalidEmail | InvalidPassword | UserData;
+export type CreateUserResponse = InvalidEmail | InvalidPassword | User;
