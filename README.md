@@ -2,29 +2,29 @@
 
 ## Estrutura Clean Architecture
 
-### entities
+### domain
 
 > Regras e entidades de negócio.
 
-> Dominio.
+> Entidades de dominio.
 
 > Erros de dominio.
 
-> Protocolos e interfaces.
+> Protocolos e definições de negócio.
 
-### usecases
-
-> Casos de Uso.
+### data
 
 > Regras do sistema.
 
 > Operações de mais alto nível e features do sistema.
 
+> Casos de Uso.
+
 > Erros direcionados ao tratamento dos casos de uso.
 
 ### main
 
-> Camada onde configurações, adapter e dependencias são injetadas.
+> Camada onde configurações, adapters e dependencias são injetadas.
 
 > Camada que conhece as demais e as solidifica.
 
@@ -32,27 +32,42 @@
 
 ### presentation
 
-> Camada de adaptadores de intreface.
+> Camada de adaptadores de intreface, como as controllers.
 
 > Chama casos de uso e tecnologias especificas.
 
+### infra
+
+> Camada onde a infraestrutura é concentrada.
+
+> Disponibiliza adaptadores de bibliotecas externas e banco de dados.
+
+<br>
+<div  align="center" >
+<img src="./assets/clean.png " alt="clean architecture layers - folder by Otávio Lemos" style="height: 550px; width:650px;border-radius:20%;"/>
+</div>
+
+<br>
+<hr>
 <br>
 
-### Criação do Projeto
+### Detalhes do Projeto
 
--   [x] criação do projeto
--   [x] versionamento
--   [x] configuração de typescript
--   [x] configuração de eslint/prettier
--   [x] configuração de jest
--   [x] configuração swagger
--   [x] configuração CORS
--   [x] configuração dotenv + cross-env
+-   [x] Clean Architecture
+-   [x] NodeJS
+-   [x] Typescript
+-   [x] Eslint + Prettier
+-   [x] Integration Tests with jest
+-   [x] Unit Tests with jest
+-   [x] Swagger Documentation
+-   [x] CORS Configuration
+-   [x] dotenv + cross-env
+-   [ ] Postgres Database
+-   [ ] Prisma ORM
+-   [ ] Path Mapping
+-   [ ] Express
+-   [ ] xxx
 
-### Configuração do ORM
-
--   [ ] configuração de banco
--   [ ] criação de conexões -> dev e test
--   [ ] estrutura para teste de integração(supertest) e unitário
--   [ ] confiração do path mapping e folders
--   [ ] estruturação da arquitetura do projeto
+<br>
+<hr>
+<br>
