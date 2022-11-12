@@ -54,6 +54,7 @@
 ### Detalhes do Projeto
 
 -   [x] Clean Architecture
+-   [x] Git - Conventional Commits
 -   [x] NodeJS
 -   [x] Typescript
 -   [x] Eslint + Prettier
@@ -62,11 +63,10 @@
 -   [x] Swagger Documentation
 -   [x] CORS Configuration
 -   [x] dotenv + cross-env
+-   [x] Path Mapping
 -   [ ] Postgres Database
 -   [ ] Prisma ORM
--   [ ] Path Mapping
 -   [ ] Express
--   [ ] xxx
 
 <br>
 <hr>
