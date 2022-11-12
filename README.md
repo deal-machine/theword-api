@@ -55,6 +55,7 @@
 
 -   [x] Clean Architecture
 -   [x] Git - Conventional Commits
+-   [x] Husky Hook
 -   [x] NodeJS
 -   [x] Typescript
 -   [x] Eslint + Prettier
