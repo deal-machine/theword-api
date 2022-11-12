@@ -1,6 +1,30 @@
-# API NodeJS
+# Deliveries API NodeJS
 
-## Estrutura Clean Architecture
+## Setup
+
+### Open project folder and install dependencies
+
+> npm install
+
+> yarn install
+
+### To run app
+
+> npm run dev
+
+> yarn dev
+
+### To run tests
+
+> npm run test
+
+> yarn test
+
+<br>
+<hr>
+<br>
+
+## Structure
 
 ### domain
 
