@@ -2,7 +2,7 @@ import { User } from "src/domain/entities/user";
 import { Encrypter } from "src/infra/protocols/encrypter";
 import { IdGenerator } from "src/infra/protocols/id-generator";
 import { UserCreateDTO } from "src/usecases/modules/createUser/create-user";
-import { UserRepository } from "src/usecases/protocols/user-repository";
+import { UserRepository } from "src/data/protocols/user-repository";
 
 export class UserRepositoryInMemory implements UserRepository {
     private readonly userEntity: User[];

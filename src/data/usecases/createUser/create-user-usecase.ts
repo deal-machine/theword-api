@@ -1,6 +1,8 @@
-import { User } from "src/domain/entities/user";
 import { UserRepository } from "../../protocols/user-repository";
-import { CreateUser, UserCreateDTO } from "./create-user";
+import {
+    CreateUser,
+    UserCreateDTO,
+} from "../../../domain/usecases/create-user";
 import { CreateUserResponse } from "./create-user-response";
 
 export class CreateUserUseCase implements CreateUser {
