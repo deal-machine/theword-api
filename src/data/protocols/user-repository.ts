@@ -1,5 +1,5 @@
-import { User } from "src/domain/entities/user";
-import { UserCreateDTO } from "../../domain/usecases/create-user";
+import { User } from "@entities/user";
+import { UserCreateDTO } from "@usecases/create-user";
 
 export interface UserRepository {
     findAll: () => Promise<User[]>;

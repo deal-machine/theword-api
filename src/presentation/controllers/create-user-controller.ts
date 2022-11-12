@@ -1,4 +1,4 @@
-import { CreateUser } from "src/domain/usecases/create-user";
+import { CreateUser } from "@usecases/create-user";
 import { badRequest, ok, serverError } from "../helpers/http-helper";
 import { Controller } from "../protocols/controller";
 import { HttpRequest, HttpResponse } from "../protocols/http";

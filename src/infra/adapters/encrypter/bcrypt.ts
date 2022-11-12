@@ -1,4 +1,4 @@
-import { Encrypter } from "src/infra/protocols/encrypter";
+import { Encrypter } from "@infra/protocols/encrypter";
 import { compare, hash } from "bcrypt";
 
 export class Bcrypt implements Encrypter {

@@ -1,4 +1,4 @@
-import { UserRepository } from "../../protocols/user-repository";
+import { UserRepository } from "@data/protocols/user-repository";
 import {
     CreateUser,
     UserCreateDTO,

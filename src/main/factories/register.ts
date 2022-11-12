@@ -1,8 +1,8 @@
-import { UserRepositoryInMemory } from "src/infra/database/in-memory/repositories";
-import { Bcrypt } from "src/infra/adapters/encrypter/bcrypt";
-import { Uuid } from "src/infra/adapters/id-generator/uuid";
-import { CreateUserController } from "src/presentation/controllers/create-user-controller";
-import { CreateUserUseCase } from "src/data/usecases/createUser/create-user-usecase";
+import { UserRepositoryInMemory } from "@infra/database/in-memory/repositories";
+import { Bcrypt } from "@infra/adapters/encrypter/bcrypt";
+import { Uuid } from "@infra/adapters/id-generator/uuid";
+import { CreateUserController } from "@controllers/create-user-controller";
+import { CreateUserUseCase } from "@modules/createUser/create-user-usecase";
 
 export const makeCreateUserController = (): CreateUserController => {
     const idGenerator = new Uuid();

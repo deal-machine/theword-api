@@ -1,5 +1,5 @@
-import { User } from "src/domain/entities/user";
-import { CreateUserResponse } from "../../data/usecases/createUser/create-user-response";
+import { User } from "@entities/user";
+import { CreateUserResponse } from "@modules/createUser/create-user-response";
 
 export type UserCreateDTO = Omit<User, "id">;
 
