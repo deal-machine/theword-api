@@ -1,5 +1,5 @@
-import { UserData } from "src/entities/proto/user";
-import { UserRepository } from "../../proto/user-repository";
+import { UserData } from "src/domain/entities/user";
+import { UserRepository } from "../../protocols/user-repository";
 import { CreateUser } from "./create-user";
 import { CreateUserResponse } from "./create-user-response";
 

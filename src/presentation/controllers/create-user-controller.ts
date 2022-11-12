@@ -1,7 +1,7 @@
 import { CreateUser } from "src/usecases/modules/createUser/create-user";
 import { badRequest, ok, serverError } from "../helpers/http-helper";
-import { Controller } from "../proto/controller";
-import { HttpRequest, HttpResponse } from "../proto/http";
+import { Controller } from "../protocols/controller";
+import { HttpRequest, HttpResponse } from "../protocols/http";
 
 export class CreateUserController implements Controller {
     private readonly createUser: CreateUser;

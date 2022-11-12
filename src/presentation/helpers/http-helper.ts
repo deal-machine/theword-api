@@ -1,5 +1,5 @@
 import { ServerError } from "../errors/server-error";
-import { HttpResponse } from "../proto/http";
+import { HttpResponse } from "../protocols/http";
 
 const ok = (data: any): HttpResponse => ({
     data,
