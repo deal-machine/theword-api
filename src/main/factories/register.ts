@@ -7,7 +7,11 @@ import { CreateUserUseCase } from "@modules/createUser/create-user-usecase";
 export const makeCreateUserController = (): CreateUserController => {
     const idGenerator = new Uuid();
     const encrypter = new Bcrypt();
-    const userRepository = new UserRepositoryInMemory(idGenerator, encrypter);
-    const createUserUseCase = new CreateUserUseCase(userRepository);
+    const userRepository = new UserRepositoryInMemory();
+    const createUserUseCase = new CreateUserUseCase(
+        userRepository,
+        encrypter,
+        idGenerator
+    );
     return new CreateUserController(createUserUseCase);
 };

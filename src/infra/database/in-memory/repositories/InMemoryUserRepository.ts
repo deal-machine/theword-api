@@ -1,18 +1,11 @@
 import { User } from "@entities/user";
-import { Encrypter } from "@infra/protocols/encrypter";
-import { IdGenerator } from "@infra/protocols/id-generator";
-import { UserCreateDTO } from "@usecases/create-user";
 import { UserRepository } from "@data/protocols/user-repository";
 
 export class UserRepositoryInMemory implements UserRepository {
     private readonly userEntity: User[];
-    private readonly idGenerator: IdGenerator;
-    private readonly encrypter: Encrypter;
 
-    constructor(IdGenerator: IdGenerator, encrypter: Encrypter) {
+    constructor() {
         this.userEntity = [];
-        this.idGenerator = IdGenerator;
-        this.encrypter = encrypter;
     }
 
     async findAll(): Promise<User[]> {
@@ -23,12 +16,12 @@ export class UserRepositoryInMemory implements UserRepository {
         return this.userEntity.find((user) => user.email === email);
     }
 
-    async create(user: UserCreateDTO): Promise<User> {
+    async create(user: User): Promise<User> {
         const newUser: User = {
-            id: this.idGenerator.random(),
+            id: user.id,
             email: user.email,
-            name: user.name.toUpperCase(),
-            password: await this.encrypter.hash(user.password),
+            name: user.name,
+            password: user.password,
         };
 
         this.userEntity.push(newUser);
