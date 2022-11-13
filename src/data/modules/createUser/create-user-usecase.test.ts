@@ -19,8 +19,8 @@ const makeUserRepository = (): UserRepository => {
         async findAll(): Promise<User[]> {
             return [];
         }
-        async findByEmail(email: string): Promise<User | undefined> {
-            return undefined;
+        async findByEmail(email: string): Promise<User | null> {
+            return null;
         }
         async create(user: User): Promise<User> {
             return user;
