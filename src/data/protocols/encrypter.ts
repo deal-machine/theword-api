@@ -1,4 +1,10 @@
 export interface Encrypter {
     hash: (password: string) => Promise<string>;
-    compare: (password: string, hash: string) => Promise<boolean>;
+    compare: ({
+        password,
+        hash,
+    }: {
+        password: string;
+        hash: string;
+    }) => Promise<boolean>;
 }
