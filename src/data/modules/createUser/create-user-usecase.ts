@@ -1,31 +1,39 @@
-import { UserRepository } from "@data/protocols/user-repository";
-import { Encrypter } from "@data/protocols/encrypter";
-import { IdGenerator } from "@data/protocols/id-generator";
-import { CreateUser, UserCreateDTO } from "@usecases/create-user";
-import { CreateUserResponse } from "./create-user-response";
+import {
+    User,
+    CreateUser,
+    CreateUserResponse,
+    Encrypter,
+    IdGenerator,
+    UserCreateDTO,
+    UserRepository,
+} from "./create-user-protocols";
+interface CreateUserConstructor {
+    userRepo: UserRepository;
+    encrypter: Encrypter;
+    idGenerator: IdGenerator;
+}
 
 export class CreateUserUseCase implements CreateUser {
     private readonly userRepository: UserRepository;
     private readonly idGenerator: IdGenerator;
     private readonly encrypter: Encrypter;
 
-    constructor(
-        userRepo: UserRepository,
-        encrypter: Encrypter,
-        idGenerator: IdGenerator
-    ) {
+    constructor({ userRepo, encrypter, idGenerator }: CreateUserConstructor) {
         this.userRepository = userRepo;
         this.encrypter = encrypter;
         this.idGenerator = idGenerator;
     }
 
     async createUser(user: UserCreateDTO): Promise<CreateUserResponse> {
+        const userModel = User.create(user);
+
         const newUser = await this.userRepository.create({
             id: this.idGenerator.random(),
-            email: user.email.toUpperCase(),
-            name: user.name.toUpperCase(),
+            email: userModel.email,
+            name: userModel.name,
             password: await this.encrypter.hash(user.password),
         });
+
         return newUser;
     }
 }
