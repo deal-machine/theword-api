@@ -13,7 +13,7 @@ const badRequest = (error: any): HttpResponse => ({
 
 const serverError = (): HttpResponse => ({
     statusCode: 500,
-    data: new ServerError(),
+    errors: new ServerError(),
 });
 
 export { ok, badRequest, serverError };
