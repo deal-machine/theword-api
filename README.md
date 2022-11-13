@@ -1,4 +1,29 @@
-# Deliveries API NodeJS
+# The Word API
+
+## Features
+
+-   [ ] Business Management - Gestão Administrativa
+-   [ ] Events - Agendamentos, calendários e eventos
+-   [ ] Members - Membros
+-   [ ] Groups and Segments- Grupos e segmentos
+-   [ ] Timeline and notifications (events, news) - Linha do tempo e notificações com eventos e noticias
+-   [ ] Bible - Biblia online
+-   [ ] Messages and words(text, video and sound) - Mensagens e palavras(texto, video e sons)
+-   [ ] Notepad - Bloco de anotações
+-   [ ] Pray requests - Pedidos de oração
+-   [ ] Offers - Ofertas e doações
+
+## Entities
+
+-   [ ] Church
+-   [ ] Address
+-   [ ] Event
+-   [ ] Group
+-   [ ] Notification
+-   [ ] Content -> Bible, Message, Word
+-   [ ] Notepad
+-   [ ] Request -> Pray
+-   [ ] Offer
 
 ## Setup
 
@@ -19,6 +44,14 @@
 > npm run test
 
 > yarn test
+
+### To run prisma generate
+
+> npm run prisma:generate
+
+### To run prisma migrations
+
+> npm run prisma:migrate
 
 <br>
 <hr>
@@ -89,8 +122,8 @@
 -   [x] CORS Configuration
 -   [x] dotenv + cross-env
 -   [x] Path Mapping
--   [ ] Postgres Database
--   [ ] Prisma ORM
+-   [x] Postgres Database
+-   [x] Prisma ORM
 -   [ ] Express
 
 <br>
