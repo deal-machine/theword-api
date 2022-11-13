@@ -1,12 +1,14 @@
-import { Encrypter } from "@data/protocols/encrypter";
-import { IdGenerator } from "@data/protocols/id-generator";
-import { UserRepository } from "@data/protocols/user-repository";
-import { User } from "@entities/user";
-import { UserCreateDTO } from "@usecases/create-user";
-import { CreateUserUseCase } from "./create-user-usecase";
+import {
+    User,
+    Encrypter,
+    IdGenerator,
+    UserRepository,
+    CreateUser,
+    CreateUserUseCase,
+} from "./create-user-protocols";
 
 interface SutType {
-    sut: CreateUserUseCase;
+    sut: CreateUser;
     userRepositoryStub: UserRepository;
     encrypterStub: Encrypter;
     idGeneratorStub: IdGenerator;
@@ -34,7 +36,13 @@ const makeEncrypterStub = (): Encrypter => {
         async hash(password: string): Promise<string> {
             return password + "H4SH";
         }
-        async compare(password: string, hash: string): Promise<boolean> {
+        async compare({
+            password,
+            hash,
+        }: {
+            password: string;
+            hash: string;
+        }): Promise<boolean> {
             return password === hash;
         }
     }
@@ -52,11 +60,11 @@ const makeSut = (): SutType => {
     const userRepositoryStub = makeUserRepository();
     const encrypterStub = makeEncrypterStub();
     const idGeneratorStub = makeIdGeneratorStub();
-    const sut = new CreateUserUseCase(
-        userRepositoryStub,
-        encrypterStub,
-        idGeneratorStub
-    );
+    const sut = new CreateUserUseCase({
+        userRepo: userRepositoryStub,
+        encrypter: encrypterStub,
+        idGenerator: idGeneratorStub,
+    });
 
     return { sut, userRepositoryStub, encrypterStub, idGeneratorStub };
 };
