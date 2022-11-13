@@ -12,21 +12,25 @@ export class CreateUserController implements Controller {
 
     async handle(httpRequest: HttpRequest): Promise<HttpResponse> {
         try {
-            if (!httpRequest) return badRequest({ field: "httpRequest" });
+            if (!httpRequest.body) return badRequest({ field: "body" });
+
+            const requiredFields = ["email", "name", "password"];
+            for (const field of requiredFields) {
+                if (!httpRequest.body[field]) {
+                    return badRequest({ field });
+                }
+            }
 
             const { email, name, password } = httpRequest.body;
 
             const newUser = await this.createUser.createUser({
-                email,
                 name,
+                email,
                 password,
             });
 
-            if (!newUser) return badRequest({ field: "new user" });
-
-            return ok({ newUser });
+            return ok({ user: newUser });
         } catch (error) {
-            console.error(error);
             return serverError();
         }
     }
