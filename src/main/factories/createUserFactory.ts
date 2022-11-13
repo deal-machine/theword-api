@@ -4,14 +4,14 @@ import { Uuid } from "@infra/adapters/id-generator/uuid";
 import { CreateUserController } from "@controllers/create-user-controller";
 import { CreateUserUseCase } from "@modules/createUser/create-user-usecase";
 
-export const makeCreateUserController = (): CreateUserController => {
+export const makeCreateUserFactory = (): CreateUserController => {
     const idGenerator = new Uuid();
     const encrypter = new Bcrypt();
     const userRepository = new UserRepositoryInMemory();
-    const createUserUseCase = new CreateUserUseCase(
-        userRepository,
+    const createUserUseCase = new CreateUserUseCase({
+        userRepo: userRepository,
         encrypter,
-        idGenerator
-    );
+        idGenerator,
+    });
     return new CreateUserController(createUserUseCase);
 };
