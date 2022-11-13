@@ -6,7 +6,9 @@
     "scripts": {
         "dev": "ts-node-dev -r tsconfig-paths/register --inspect --transpile-only --ignore-watch node_modules --respawn src/main/http/server.ts",
         "test": "cross-env NODE_ENV=test jest --detectOpenHandles --coverage --testTimeout=10000 --force-exit",
-        "test:staged": "cross-env NODE_ENV=test jest --detectOpenHandles --testTimeout=10000 --force-exit"
+        "test:staged": "cross-env NODE_ENV=test jest --detectOpenHandles --testTimeout=10000 --force-exit",
+        "prisma:generate": "npx prisma generate --schema=src/infra/database/prisma/schema.prisma",
+        "prisma:migrate": "npx prisma migrate dev --schema=src/infra/database/prisma/schema.prisma"
     },
     "keywords": [],
     "author": "",
