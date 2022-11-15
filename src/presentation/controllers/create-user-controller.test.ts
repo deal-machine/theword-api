@@ -1,8 +1,12 @@
-import { User } from "@entities/user";
-import { Controller } from "@presentation/protocols/controller";
-import { HttpRequest } from "@presentation/protocols/http";
-import { CreateUser, UserCreateDTO } from "@usecases/create-user";
-import { CreateUserController } from "./create-user-controller";
+import {
+    Controller,
+    CreateUser,
+    UserCreateDTO,
+    Result,
+    User,
+    CreateUserController,
+    HttpRequest,
+} from ".";
 
 interface SutType {
     createUserStub: CreateUser;
@@ -11,13 +15,13 @@ interface SutType {
 
 const makeCreateUser = (): CreateUser => {
     class CreateUserStub implements CreateUser {
-        async createUser(user: UserCreateDTO): Promise<User> {
-            return {
+        async createUser(user: UserCreateDTO): Promise<Result<User>> {
+            return Result.ok<User>({
                 id: String(Math.floor(Math.random() * 10)),
                 email: user.email,
                 name: user.name,
                 password: user.password,
-            };
+            });
         }
     }
 
@@ -41,9 +45,10 @@ describe("Create User Controller", () => {
         expect(response).toBeTruthy();
         expect(response).toHaveProperty("statusCode");
         expect(response.statusCode).toBe(400);
-        expect(response).toHaveProperty("errors");
-        expect(response.errors).toHaveProperty("field");
-        expect(response.errors.field).toEqual("body");
+        expect(response).toHaveProperty("body");
+        expect(response.body).toHaveProperty("error");
+        expect(response.body.error).toHaveProperty("field");
+        expect(response.body.error.field).toEqual("body");
     });
     test("should return badRequest if not email is provided", async () => {
         const { sut } = makeSut();
@@ -58,9 +63,11 @@ describe("Create User Controller", () => {
         expect(response).toBeTruthy();
         expect(response).toHaveProperty("statusCode");
         expect(response.statusCode).toBe(400);
-        expect(response).toHaveProperty("errors");
-        expect(response.errors).toHaveProperty("field");
-        expect(response.errors.field).toEqual("email");
+
+        expect(response).toHaveProperty("body");
+        expect(response.body).toHaveProperty("error");
+        expect(response.body.error).toHaveProperty("field");
+        expect(response.body.error.field).toEqual("email");
     });
     test("should return badRequest if not name is provided", async () => {
         const { sut } = makeSut();
@@ -75,9 +82,10 @@ describe("Create User Controller", () => {
         expect(response).toBeTruthy();
         expect(response).toHaveProperty("statusCode");
         expect(response.statusCode).toBe(400);
-        expect(response).toHaveProperty("errors");
-        expect(response.errors).toHaveProperty("field");
-        expect(response.errors.field).toEqual("name");
+        expect(response).toHaveProperty("body");
+        expect(response.body).toHaveProperty("error");
+        expect(response.body.error).toHaveProperty("field");
+        expect(response.body.error.field).toEqual("name");
     });
     test("should return badRequest if not password is provided", async () => {
         const { sut } = makeSut();
@@ -92,9 +100,10 @@ describe("Create User Controller", () => {
         expect(response).toBeTruthy();
         expect(response).toHaveProperty("statusCode");
         expect(response.statusCode).toBe(400);
-        expect(response).toHaveProperty("errors");
-        expect(response.errors).toHaveProperty("field");
-        expect(response.errors.field).toEqual("password");
+        expect(response).toHaveProperty("body");
+        expect(response.body).toHaveProperty("error");
+        expect(response.body.error).toHaveProperty("field");
+        expect(response.body.error.field).toEqual("password");
     });
     test("should return serverError if CreateUser throws", async () => {
         const { sut, createUserStub } = makeSut();
@@ -113,7 +122,10 @@ describe("Create User Controller", () => {
         expect(response).toBeTruthy();
         expect(response).toHaveProperty("statusCode");
         expect(response.statusCode).toBe(500);
-        expect(response).toHaveProperty("errors");
+
+        expect(response).toHaveProperty("body");
+        expect(response.body).toHaveProperty("error");
+        expect(response.body.error).toEqual("Internal Server Error");
     });
     test("should call CreateUser with correct values", async () => {
         const { sut, createUserStub } = makeSut();
@@ -147,11 +159,12 @@ describe("Create User Controller", () => {
         expect(response).toBeTruthy();
         expect(response).toHaveProperty("statusCode");
         expect(response.statusCode).toBe(200);
-        expect(response).toHaveProperty("data");
-        expect(response.data).toHaveProperty("user");
-        expect(response.data.user).toHaveProperty("id");
-        expect(response.data.user).toHaveProperty("email");
-        expect(response.data.user).toHaveProperty("name");
-        expect(response.data.user).toHaveProperty("password");
+        expect(response).toHaveProperty("body");
+        expect(response.body).toHaveProperty("data");
+        expect(response.body.data).toHaveProperty("user");
+        expect(response.body.data.user).toHaveProperty("id");
+        expect(response.body.data.user).toHaveProperty("email");
+        expect(response.body.data.user).toHaveProperty("name");
+        expect(response.body.data.user).toHaveProperty("password");
     });
 });
