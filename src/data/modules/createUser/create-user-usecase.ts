@@ -1,12 +1,12 @@
 import {
     User,
     CreateUser,
-    CreateUserResponse,
+    Result,
     Encrypter,
     IdGenerator,
     UserCreateDTO,
     UserRepository,
-} from "./create-user-protocols";
+} from ".";
 interface CreateUserConstructor {
     userRepo: UserRepository;
     encrypter: Encrypter;
@@ -24,9 +24,15 @@ export class CreateUserUseCase implements CreateUser {
         this.idGenerator = idGenerator;
     }
 
-    async createUser(user: UserCreateDTO): Promise<CreateUserResponse> {
-        const userModel = User.create(user);
+    async createUser(user: UserCreateDTO): Promise<Result<User>> {
+        const userExists = await this.userRepository.exists({
+            email: user.email.toUpperCase(),
+        });
+        if (userExists) {
+            return Result.fail("User already exists");
+        }
 
+        const userModel = User.create(user);
         const newUser = await this.userRepository.create({
             id: this.idGenerator.random(),
             email: userModel.email,
@@ -34,6 +40,6 @@ export class CreateUserUseCase implements CreateUser {
             password: await this.encrypter.hash(user.password),
         });
 
-        return newUser;
+        return Result.ok<User>(newUser);
     }
 }
