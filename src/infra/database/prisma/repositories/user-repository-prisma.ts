@@ -17,7 +17,9 @@ export class UserRepositoryPrisma implements UserRepository {
     async create(user: User): Promise<User> {
         return this.users.create({ data: user });
     }
-    async exists(email: string): Promise<boolean> {
-        return !!this.users.findUnique({ where: { email } });
+    async exists({ email }: { email: string }): Promise<boolean> {
+        const user = await this.users.findUnique({ where: { email } });
+
+        return !!user;
     }
 }

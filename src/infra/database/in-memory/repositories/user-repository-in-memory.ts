@@ -29,7 +29,7 @@ export class UserRepositoryInMemory implements UserRepository {
         return newUser;
     }
 
-    async exists(email: string): Promise<boolean> {
+    async exists({ email }: { email: string }): Promise<boolean> {
         const userExists = this.userEntity.find((user) => user.email === email);
         return !!userExists;
     }

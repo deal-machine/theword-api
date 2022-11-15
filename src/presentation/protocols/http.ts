@@ -4,8 +4,7 @@ interface HttpRequest {
 
 interface HttpResponse {
     statusCode: number;
-    data?: any;
-    errors?: any;
+    body?: any;
 }
 
 export { HttpRequest, HttpResponse };
