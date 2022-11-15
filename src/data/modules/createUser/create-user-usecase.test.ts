@@ -5,7 +5,7 @@ import {
     UserRepository,
     CreateUser,
     CreateUserUseCase,
-} from "./create-user-protocols";
+} from ".";
 
 interface SutType {
     sut: CreateUser;
@@ -25,8 +25,8 @@ const makeUserRepository = (): UserRepository => {
         async create(user: User): Promise<User> {
             return user;
         }
-        async exists(email: string): Promise<boolean> {
-            return !!email;
+        async exists({ email }: { email: string }): Promise<boolean> {
+            return !email;
         }
     }
     return new UserRepositoryStub();
@@ -78,11 +78,12 @@ describe("Create User Use Case", () => {
             password: "12345",
         };
 
-        const user = await sut.createUser(userDTO);
-        expect(user).toBeTruthy();
-        expect(user.name).toStrictEqual("USER TEST");
-        expect(user.email).toStrictEqual("ANY_EMAIL@TEST.COM");
-        expect(user.id).toBeTruthy();
-        expect(user.password).toStrictEqual("12345H4SH");
+        const result = await sut.createUser(userDTO);
+        expect(result.isSuccess).toBeTruthy();
+        const user = result.getValue();
+        expect(user?.name).toStrictEqual("USER TEST");
+        expect(user?.email).toStrictEqual("ANY_EMAIL@TEST.COM");
+        expect(user?.id).toBeTruthy();
+        expect(user?.password).toStrictEqual("12345H4SH");
     });
 });
