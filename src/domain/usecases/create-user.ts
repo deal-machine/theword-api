@@ -1,8 +1,8 @@
 import { User } from "@entities/user";
-import { CreateUserResponse } from "@modules/createUser/create-user-response";
+import { Result } from "@modules/createUser";
 
 export type UserCreateDTO = Omit<User, "id">;
 
 export interface CreateUser {
-    createUser: (user: UserCreateDTO) => Promise<CreateUserResponse>;
+    createUser: (user: UserCreateDTO) => Promise<Result<User>>;
 }
