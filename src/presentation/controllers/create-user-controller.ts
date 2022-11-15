@@ -1,7 +1,4 @@
-import { CreateUser } from "@usecases/create-user";
-import { badRequest, ok, serverError } from "../helpers/http-helper";
-import { Controller } from "../protocols/controller";
-import { HttpRequest, HttpResponse } from "../protocols/http";
+import { CreateUser, Response, Controller, HttpRequest, HttpResponse } from ".";
 
 export class CreateUserController implements Controller {
     private readonly createUser: CreateUser;
@@ -12,26 +9,31 @@ export class CreateUserController implements Controller {
 
     async handle(httpRequest: HttpRequest): Promise<HttpResponse> {
         try {
-            if (!httpRequest.body) return badRequest({ field: "body" });
+            if (!httpRequest.body) {
+                return Response.badRequest({ field: "body" });
+            }
 
             const requiredFields = ["email", "name", "password"];
             for (const field of requiredFields) {
                 if (!httpRequest.body[field]) {
-                    return badRequest({ field });
+                    return Response.badRequest({ field });
                 }
             }
 
             const { email, name, password } = httpRequest.body;
 
-            const newUser = await this.createUser.createUser({
+            const result = await this.createUser.createUser({
                 name,
                 email,
                 password,
             });
+            if (result.isFailure) {
+                return Response.badRequest(result.error);
+            }
 
-            return ok({ user: newUser });
+            return Response.ok({ user: result.getValue() });
         } catch (error) {
-            return serverError();
+            return Response.serverError();
         }
     }
 }
