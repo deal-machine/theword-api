@@ -124,7 +124,7 @@
 -   [x] Path Mapping
 -   [x] Postgres Database
 -   [x] Prisma ORM
--   [ ] Express
+-   [x] Express
 
 <br>
 <hr>

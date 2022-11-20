@@ -1,6 +1,6 @@
-import { HttpRequest, HttpResponse } from "@presentation/protocols/http";
 import { Request, Response } from "express";
-import { Controller } from "src/presentation/protocols/controller";
+import { HttpRequest, HttpResponse } from "@presentation/protocols/http";
+import { Controller } from "@presentation/protocols/controller";
 export class ExpressRouteAdapter {
     static adapt(controller: Controller): any {
         return async (request: Request, response: Response) => {

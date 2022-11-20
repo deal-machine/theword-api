@@ -1,6 +1,5 @@
-import { UserRepositoryInMemory } from "@infra/database/in-memory";
-import { Bcrypt } from "@infra/adapters/encrypter/bcrypt";
 import { Uuid } from "@infra/adapters/id-generator/uuid";
+import { Bcrypt } from "@infra/adapters/encrypter/bcrypt";
 import { CreateUserController } from "@controllers/create-user-controller";
 import { CreateUserUseCase } from "@modules/createUser/create-user-usecase";
 import { UserRepositoryPrisma } from "@infra/database/prisma/repositories/user-repository-prisma";
