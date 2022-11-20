@@ -1,4 +1,7 @@
-export default {
+const { pathsToModuleNameMapper } = require("ts-jest");
+const { compilerOptions } = require("./tsconfig");
+
+module.exports = {
     roots: ["<rootDir>/src"],
     collectCoverageFrom: [
         "<rootDir>/src/**/*.ts",
@@ -6,6 +9,9 @@ export default {
         "!**/protocols/**",
         "!<rootDir>/src/main/docs/**",
     ],
+    moduleNameMapper: pathsToModuleNameMapper(compilerOptions.paths, {
+        prefix: "<rootDir>/",
+    }),
     coverageDirectory: "coverage",
     coverageProvider: "v8",
     coverageThreshold: {
