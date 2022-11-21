@@ -45,13 +45,17 @@
 
 > yarn test
 
-### To run prisma generate
+### To run typeorm generate
 
-> npm run prisma:generate
+> npx typeorm migration:create ./src/infra/database/typeorm/migrations/{MigrationName}
 
-### To run prisma migrations
+### To run typeorm migrations
 
-> npm run prisma:migrate
+> npm run migrate
+
+### To revert typeorm migrations
+
+> npm run revert
 
 <br>
 <hr>
@@ -123,7 +127,7 @@
 -   [x] dotenv + cross-env
 -   [x] Path Mapping
 -   [x] Postgres Database
--   [x] Prisma ORM
+-   [x] TypeORM
 -   [x] Express
 
 <br>
